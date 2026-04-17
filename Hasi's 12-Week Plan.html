@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<!-- saved from url=(0236)file:///Users/hasinihemanth/Library/Application%20Support/Claude/local-agent-mode-sessions/dd099237-bc0f-45be-bb40-f4d89f11ed3f/7a5393bb-53f2-4764-b937-5453db20ab9d/local_0524b4ba-65dd-4241-997c-0ff5a43b2398/outputs/hasi_health_app.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Hasi Health">
+<meta name="theme-color" content="#059669">
+<title>Hasi's 12-Week Plan</title>
+<style>
+  :root {
+    --green: #059669;
+    --green-light: #D1FAE5;
+    --green-dark: #047857;
+    --blue: #3B82F6;
+    --blue-light: #DBEAFE;
+    --purple: #8B5CF6;
+    --purple-light: #EDE9FE;
+    --amber: #F59E0B;
+    --amber-light: #FEF3C7;
+    --red: #EF4444;
+    --gray: #6B7280;
+    --gray-light: #F3F4F6;
+    --gray-100: #F9FAFB;
+    --white: #FFFFFF;
+    --text: #111827;
+    --text-2: #374151;
+    --text-3: #6B7280;
+    --border: #E5E7EB;
+    --radius: 16px;
+    --radius-sm: 10px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #F9FAFB; color: var(--text); }
+  #app { display: flex; flex-direction: column; height: 100vh; height: 100dvh; }
+  /* HEADER */
+  .header { background: var(--white); padding: 14px 20px 10px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+  .header-row { display: flex; justify-content: space-between; align-items: center; }
+  .header-title { font-size: 18px; font-weight: 700; color: var(--green-dark); }
+  .header-date { font-size: 13px; color: var(--text-3); margin-top: 2px; }
+  .header-badge { background: var(--green); color: white; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; }
+  /* MAIN */
+  .main { flex: 1; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; padding-bottom: 80px; }
+  /* BOTTOM NAV */
+  .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--white); border-top: 1px solid var(--border); display: flex; z-index: 100; padding-bottom: env(safe-area-inset-bottom); }
+  .nav-btn { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 4px 8px; border: none; background: none; cursor: pointer; color: var(--text-3); font-size: 10px; font-weight: 500; gap: 3px; transition: color 0.15s; }
+  .nav-btn.active { color: var(--green); }
+  .nav-icon { font-size: 22px; line-height: 1; }
+  /* TABS */
+  .tab { display: none; }
+  .tab.active { display: block; }
+  /* SECTION CARDS */
+  .section { margin: 12px 16px; background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+  .section-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px 12px; cursor: pointer; user-select: none; }
+  .section-title { font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+  .section-progress { font-size: 12px; color: var(--text-3); font-weight: 600; }
+  .section-toggle { color: var(--text-3); font-size: 18px; transition: transform 0.2s; }
+  .section-toggle.open { transform: rotate(180deg); }
+  .section-body { border-top: 1px solid var(--border); }
+  .section-body.hidden { display: none; }
+  /* CHECKLIST ITEMS */
+  .check-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.1s; }
+  .check-item:last-child { border-bottom: none; }
+  .check-item:active { background: var(--gray-100); }
+  .check-item.done .check-label { text-decoration: line-through; color: var(--text-3); }
+  .check-box { width: 24px; height: 24px; border-radius: 8px; border: 2.5px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; transition: all 0.2s; }
+  .check-item.done .check-box { background: var(--green); border-color: var(--green); }
+  .check-checkmark { color: white; font-size: 14px; font-weight: 700; opacity: 0; transition: opacity 0.2s; }
+  .check-item.done .check-checkmark { opacity: 1; }
+  .check-content { flex: 1; }
+  .check-label { font-size: 14px; font-weight: 500; color: var(--text-2); line-height: 1.4; }
+  .check-sub { font-size: 12px; color: var(--text-3); margin-top: 2px; line-height: 1.4; }
+  .check-time { font-size: 11px; font-weight: 600; color: var(--green); background: var(--green-light); padding: 2px 6px; border-radius: 6px; margin-left: auto; flex-shrink: 0; align-self: flex-start; margin-top: 2px; }
+  /* WATER TRACKER */
+  .water-section { margin: 12px 16px; background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px; }
+  .water-title { font-size: 15px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .water-glasses { display: flex; gap: 8px; flex-wrap: wrap; }
+  .water-glass { width: 40px; height: 48px; border: 2.5px solid var(--blue); border-radius: 4px 4px 8px 8px; cursor: pointer; position: relative; overflow: hidden; transition: all 0.2s; background: var(--white); }
+  .water-glass.filled { background: var(--blue); }
+  .water-glass-icon { position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); font-size: 16px; }
+  .water-label { font-size: 11px; color: var(--text-3); margin-top: 8px; text-align: center; }
+  /* PROGRESS RING */
+  .progress-card { margin: 12px 16px; background: linear-gradient(135deg, var(--green-dark), var(--green)); border-radius: var(--radius); padding: 20px; color: white; display: flex; align-items: center; gap: 20px; box-shadow: var(--shadow-lg); }
+  .ring-wrap { position: relative; width: 80px; height: 80px; flex-shrink: 0; }
+  .ring-svg { transform: rotate(-90deg); }
+  .ring-bg { fill: none; stroke: rgba(255,255,255,0.25); stroke-width: 8; }
+  .ring-fg { fill: none; stroke: white; stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset 0.5s ease; }
+  .ring-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 18px; font-weight: 800; color: white; }
+  .progress-info { flex: 1; }
+  .progress-day { font-size: 22px; font-weight: 800; }
+  .progress-week { font-size: 13px; opacity: 0.9; margin-top: 2px; }
+  .progress-type { font-size: 14px; font-weight: 600; margin-top: 8px; background: rgba(255,255,255,0.2); display: inline-block; padding: 4px 10px; border-radius: 20px; }
+  /* WORKOUT PHASES */
+  .phase-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 6px; margin-left: 6px; }
+  .phase-1 { background: var(--green-light); color: var(--green-dark); }
+  .phase-2 { background: var(--amber-light); color: #92400E; }
+  .phase-3 { background: #FDE8E8; color: #9B1C1C; }
+  /* CATEGORY TAGS */
+  .cat-tag { font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 5px; margin-left: 6px; }
+  .cat-compound { background: var(--purple-light); color: #5B21B6; }
+  .cat-isolation { background: var(--blue-light); color: #1D4ED8; }
+  .cat-warmup { background: var(--green-light); color: var(--green-dark); }
+  .cat-finisher { background: var(--amber-light); color: #92400E; }
+  .cat-circuit { background: #FDE8E8; color: #9B1C1C; }
+  .cat-circuit_item { background: #F5F3FF; color: #5B21B6; }
+  .cat-interval { background: var(--blue-light); color: #1D4ED8; }
+  .cat-main { background: var(--green-light); color: var(--green-dark); }
+  /* WEEK TAB */
+  .week-header { padding: 16px; background: var(--white); margin: 12px 16px; border-radius: var(--radius); box-shadow: var(--shadow); }
+  .week-title { font-size: 16px; font-weight: 700; margin-bottom: 12px; }
+  .week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+  .week-day { text-align: center; border-radius: 10px; padding: 8px 4px; cursor: pointer; transition: all 0.15s; border: 2px solid transparent; }
+  .week-day.today { background: var(--green); color: white; }
+  .week-day.today .wd-name, .week-day.today .wd-num { color: white; }
+  .week-day.past { opacity: 0.7; }
+  .week-day.future { opacity: 0.5; }
+  .wd-name { font-size: 10px; font-weight: 600; color: var(--text-3); }
+  .wd-num { font-size: 15px; font-weight: 700; color: var(--text); margin: 2px 0; }
+  .wd-icon { font-size: 14px; }
+  .wd-dot { width: 6px; height: 6px; border-radius: 50%; margin: 2px auto 0; }
+  .wd-dot.complete { background: var(--green); }
+  .wd-dot.partial { background: var(--amber); }
+  .wd-dot.empty { background: var(--border); }
+  /* WEEK PHASE CARDS */
+  .phase-card { margin: 8px 16px; background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px; }
+  .phase-card-title { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+  .phase-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .phase-row:last-child { border-bottom: none; }
+  /* PROGRESS TAB */
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 16px; }
+  .stat-card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 14px; text-align: center; }
+  .stat-label { font-size: 11px; color: var(--text-3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .stat-value { font-size: 24px; font-weight: 800; color: var(--text); margin: 4px 0; }
+  .stat-unit { font-size: 12px; color: var(--text-3); }
+  .stat-card.highlight { background: var(--green); }
+  .stat-card.highlight .stat-label, .stat-card.highlight .stat-value, .stat-card.highlight .stat-unit { color: white; }
+  /* WEIGHT ENTRY */
+  .weight-entry { margin: 12px 16px; background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px; }
+  .weight-entry label { font-size: 14px; font-weight: 600; display: block; margin-bottom: 8px; }
+  .weight-row { display: flex; gap: 10px; }
+  .weight-input { flex: 1; border: 2px solid var(--border); border-radius: var(--radius-sm); padding: 10px 14px; font-size: 16px; font-weight: 600; outline: none; transition: border-color 0.2s; }
+  .weight-input:focus { border-color: var(--green); }
+  .weight-btn { background: var(--green); color: white; border: none; border-radius: var(--radius-sm); padding: 10px 20px; font-size: 14px; font-weight: 600; cursor: pointer; }
+  .weight-log { margin-top: 14px; }
+  .weight-log-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .weight-log-item:last-child { border-bottom: none; }
+  /* CHART */
+  .chart-wrap { margin: 12px 16px; background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px; }
+  .chart-title { font-size: 14px; font-weight: 700; margin-bottom: 12px; }
+  .chart-svg-wrap { width: 100%; overflow: hidden; }
+  /* INFO TAB */
+  .info-section { margin: 12px 16px; background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); }
+  .info-header { padding: 14px 16px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+  .info-title { font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+  .info-body { padding: 0 16px 16px; border-top: 1px solid var(--border); }
+  .info-body.hidden { display: none; }
+  .info-body p { font-size: 13px; line-height: 1.6; color: var(--text-2); margin-bottom: 8px; }
+  .info-body ul { padding-left: 18px; }
+  .info-body li { font-size: 13px; line-height: 1.7; color: var(--text-2); }
+  .info-body strong { color: var(--text); }
+  /* NOTIFICATION BANNER */
+  .notif-banner { margin: 12px 16px; background: linear-gradient(135deg, #1E40AF, #3B82F6); border-radius: var(--radius); padding: 14px 16px; color: white; display: flex; align-items: center; gap: 12px; }
+  .notif-banner-text { flex: 1; font-size: 13px; }
+  .notif-btn { background: white; color: var(--blue); font-size: 12px; font-weight: 700; border: none; border-radius: 8px; padding: 6px 12px; cursor: pointer; white-space: nowrap; }
+  /* REMINDER CHIP */
+  .reminder-row { display: flex; gap: 8px; flex-wrap: wrap; padding: 12px 16px; }
+  .reminder-chip { background: var(--gray-light); border-radius: 20px; padding: 6px 12px; font-size: 12px; font-weight: 500; display: flex; align-items: center; gap: 6px; cursor: pointer; border: 2px solid transparent; }
+  .reminder-chip.active { background: var(--green-light); border-color: var(--green); color: var(--green-dark); }
+  /* EMPTY STATE */
+  .empty { text-align: center; padding: 40px 20px; color: var(--text-3); font-size: 14px; }
+  /* TOAST */
+  .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px); background: var(--text); color: white; padding: 10px 20px; border-radius: 20px; font-size: 13px; font-weight: 600; z-index: 1000; transition: transform 0.3s ease; white-space: nowrap; }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+  /* SCROLLBAR HIDE */
+  .main::-webkit-scrollbar { display: none; }
+  /* ANIMATIONS */
+  @keyframes pop { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
+  .pop { animation: pop 0.3s ease; }
+  /* IOS INSTALL HINT */
+  .install-hint { background: var(--amber-light); border: 1px solid #FDE68A; margin: 12px 16px; border-radius: var(--radius-sm); padding: 12px 14px; font-size: 12px; color: #92400E; line-height: 1.5; display: flex; gap: 10px; align-items: flex-start; }
+  .install-hint-dismiss { background: none; border: none; color: #92400E; font-size: 18px; cursor: pointer; padding: 0; line-height: 1; flex-shrink: 0; }
+  /* STREAK */
+  .streak-bar { margin: 0 16px 0; display: flex; gap: 4px; }
+  .streak-dot { flex: 1; height: 5px; border-radius: 3px; background: var(--border); }
+  .streak-dot.done { background: var(--green); }
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="header">
+    <div class="header-row">
+      <div>
+        <div class="header-title">💚 Hasi's Health Plan</div>
+        <div class="header-date" id="headerDate">Monday, Apr 13, 2026</div>
+      </div>
+      <div class="header-badge" id="headerBadge">Week 1 • Day 1</div>
+    </div>
+  </div>
+
+  <div class="main" id="mainContent">
+    <!-- TODAY TAB -->
+    <div class="tab active" id="tab-today">
+      <div id="todayContent"><div class="install-hint">
+      <div style="font-size:20px">📱</div>
+      <div>
+        <strong>Add to Home Screen</strong> to use like a native app!<br>
+        <em>iOS:</em> Tap Share → "Add to Home Screen"<br>
+        <em>Android:</em> Tap Menu → "Add to Home Screen"
+      </div>
+      <button class="install-hint-dismiss" onclick="dismissInstallHint()">✕</button>
+    </div><div class="progress-card">
+    <div class="ring-wrap">
+      <svg class="ring-svg" width="80" height="80" viewBox="0 0 80 80">
+        <circle class="ring-bg" cx="40" cy="40" r="34"></circle>
+        <circle class="ring-fg" id="ringFg" cx="40" cy="40" r="34" stroke-dasharray="213.62830044410595" stroke-dashoffset="213.62830044410595"></circle>
+      </svg>
+      <div class="ring-text" id="ringPct">0%</div>
+    </div>
+    <div class="progress-info">
+      <div class="progress-day">Day 1 of 84</div>
+      <div class="progress-week">Week 1 · Phase 1 Foundation</div>
+      <div class="progress-type">🦵 Lower Body Strength</div>
+    </div>
+  </div><div class="streak-bar" style="margin:8px 16px 12px;"><div class="streak-dot" style="background:var(--border)"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div><div class="streak-dot"></div></div><div class="water-section">
+    <div class="water-title">💧 Water Tracker</div>
+    <div class="water-glasses" id="waterGlasses"><div class="water-glass " onclick="toggleWater(&#39;2026-04-13&#39;, 0)">
+      <div class="water-glass-icon">○</div>
+    </div><div class="water-glass " onclick="toggleWater(&#39;2026-04-13&#39;, 1)">
+      <div class="water-glass-icon">○</div>
+    </div><div class="water-glass " onclick="toggleWater(&#39;2026-04-13&#39;, 2)">
+      <div class="water-glass-icon">○</div>
+    </div><div class="water-glass " onclick="toggleWater(&#39;2026-04-13&#39;, 3)">
+      <div class="water-glass-icon">○</div>
+    </div><div class="water-glass " onclick="toggleWater(&#39;2026-04-13&#39;, 4)">
+      <div class="water-glass-icon">○</div>
+    </div><div class="water-glass " onclick="toggleWater(&#39;2026-04-13&#39;, 5)">
+      <div class="water-glass-icon">○</div>
+    </div><div class="water-glass " onclick="toggleWater(&#39;2026-04-13&#39;, 6)">
+      <div class="water-glass-icon">○</div>
+    </div><div class="water-glass " onclick="toggleWater(&#39;2026-04-13&#39;, 7)">
+      <div class="water-glass-icon">○</div>
+    </div><div class="water-glass " onclick="toggleWater(&#39;2026-04-13&#39;, 8)">
+      <div class="water-glass-icon">○</div>
+    </div><div class="water-glass " onclick="toggleWater(&#39;2026-04-13&#39;, 9)">
+      <div class="water-glass-icon">○</div>
+    </div></div>
+    <div class="water-label">0/10 glasses (goal: 3L)</div>
+  </div><div class="section">
+    <div class="section-header" onclick="toggleSection(&#39;meals&#39;)">
+      <div class="section-title">🍽️ Meals &amp; Nutrition <span class="phase-badge phase-1">Phase 1</span></div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div class="section-progress">0/9</div>
+        <div class="section-toggle open">⌄</div>
+      </div>
+    </div>
+    <div class="section-body " id="section-body-meals"><div class="check-item  " id="item-m1" onclick="toggleCheck(&#39;2026-04-13&#39;,&#39;m1&#39;)">
+      <div class="check-box"><div class="check-checkmark">✓</div></div>
+      <div class="check-content">
+        <div class="check-label">💧 Drink 500ml water immediately on waking</div>
+        <div class="check-sub">Room temp or warm — before anything else</div>
+      </div>
+      <div class="check-time">7:00 AM</div>
+    </div><div class="check-item  " id="item-m2" onclick="toggleCheck(&#39;2026-04-13&#39;,&#39;m2&#39;)">
+      <div class="check-box"><div class="check-checkmark">✓</div></div>
+      <div class="check-content">
+        <div class="check-label">🌿 Psyllium husk: 5g stirred into 200ml water</div>
+        <div class="check-sub">Stir fast, drink immediately — your Ozempic hunger replacement</div>
+      </div>
+      <div class="check-time">7:05 AM</div>
+    </div><div class="check-item  " id="item-m3" onclick="toggleCheck(&#39;2026-04-13&#39;,&#39;m3&#39;)">
+      <div class="check-box"><div class="check-checkmark">✓</div></div>
+      <div class="check-content">
+        <div class="check-label">🍌 Banana (pre-workout fuel)</div>
+        <div class="check-sub">1 medium banana</div>
+      </div>
+      <div class="check-time">7:10 AM</div>
+    </div><div class="check-item  " id="item-m4" onclick="toggleCheck(&#39;2026-04-13&#39;,&#39;m4&#39;)">
+      <div class="check-box"><div class="check-checkmark">✓</div></div>
+      <div class="check-content">
+        <div class="check-label">☕ Coffee with 1/4 cup 2% milk + Splenda</div>
+        <div class="check-sub">Reduce from 1 cup to 1/4 cup milk — saves ~60 cal</div>
+      </div>
+      <div class="check-time">7:15 AM</div>
+    </div><div class="check-item  " id="item-m5" onclick="toggleCheck(&#39;2026-04-13&#39;,&#39;m5&#39;)">
+      <div class="check-box"><div class="check-checkmark">✓</div></div>
+      <div class="check-content">
+        <div class="check-label">🥣 Post-workout breakfast: Overnight oats</div>
+        <div class="check-sub">1/2 cup oats + 1 scoop Ghost Whey + 3/4 cup unsweetened almond milk + 1 tbsp chia seeds + cinnamon</div>
+      </div>
+      <div class="check-time">9:00 AM</div>
+    </div><div class="check-item  " id="item-m6" onclick="toggleCheck(&#39;2026-04-13&#39;,&#39;m6&#39;)">
+      <div class="check-box"><div class="check-checkmark">✓</div></div>
+      <div class="check-content">
+        <div class="check-label">🥗 Lunch (solid meal preferred)</div>
+        <div class="check-sub">150g grilled chicken/tuna + mixed salad + 1/2 cup quinoa or chickpeas + olive oil + lemon. OR smoothie: 1 cup blueberries + 1 scoop whey + 1/2 cup Greek yogurt + 1 tsp almond butter + psyllium husk + 1/2 cup almond milk</div>
+      </div>
+      <div class="check-time">1:00 PM</div>
+    </div><div class="check-item  optional" id="item-m7" onclick="toggleCheck(&#39;2026-04-13&#39;,&#39;m7&#39;)">
+      <div class="check-box"><div class="check-checkmark">✓</div></div>
+      <div class="check-content">
+        <div class="check-label">🍓 Optional snack (only if hungry) <em style="font-size:11px;color:var(--text-3)">(optional)</em></div>
+        <div class="check-sub">150g plain Greek yogurt + berries + 1 tsp honey — OR — 2 rice cakes + 1 tbsp almond butter</div>
+      </div>
+      <div class="check-time">3:30 PM</div>
+    </div><div class="check-item  " id="item-m8" onclick="toggleCheck(&#39;2026-04-13&#39;,&#39;m8&#39;)">
+      <div class="check-box"><div class="check-checkmark">✓</div></div>
+      <div class="check-content">
+        <div class="check-label">🍽️ Dinner: 180–200g protein + 250–300g vegetables</div>
+        <div class="check-sub">Rotate: grilled salmon, chicken, turkey mince, white fish, lean beef, shrimp, or eggs. Veg: broccoli, spinach, zucchini, asparagus, green beans (roasted/steamed in 1 tsp olive oil)</div>
+      </div>
+      <div class="check-time">7:00 PM</div>
+    </div><div class="check-item  optional" id="item-m8b" onclick="toggleCheck(&#39;2026-04-13&#39;,&#39;m8b&#39;)">
+      <div class="check-box"><div class="check-checkmark">✓</div></div>
+      <div class="check-content">
+        <div class="check-label">🍠 Add 1/2 cup brown rice or sweet potato to dinner <em style="font-size:11px;color:var(--text-3)">(optional)</em></div>
+        <div class="check-sub">WORKOUT DAYS ONLY (Mon/Wed/Fri) — skip on swim days and rest days</div>
+      </div>
+      <div class="check-time">7:00 PM</div>
+    </div><div class="check-item  " id="item-m9" onclick="toggleCheck(&#39;2026-04-13&#39;,&#39;m9&#39;)">
+      <div class="check-box"><div class="check-checkmark">✓</div></div>
+      <div class="check-content">
+        <div class="check-label">🍫 1–2 squares of 70%+ dark chocolate</div>
+        <div class="check-sub">Your daily treat — keep it, it's sustainable!</div>
+      </div>
+      <div class="check-time">7:30 PM</div>
+    </div><div class="check-item  " id="item-m10" onclick="toggleCheck(&#39;2026-04-13&#39;,&#39;m10&#39;)">
+      <div class="check-box"><div class="check-checkmark">✓</div></div>
+      <div class="check-content">
+        <div class="check-label">🥛 Before bed: casein protein</div>
+        <div class="check-sub">200g cottage cheese OR 150g plain Greek yogurt — digests slowly overnight to preserve muscle</div>
+      </div>
+      <div class="check-time">9:00 PM</div>
+    </div></div></div><div class="section">
+    <div class="section-header" onclick="toggleSection(&#39;workout&#39;)">
+      <div class="section-title">🦵 Today's Workout <span class="phase-badge phase-1">Weeks 1–4</span></div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div class="section-progress">0/9</div>
+        <div class="section-toggle open">⌄</div>
+      </div>
+    </div>
+    <div class="section-body " id="section-body-workout"><div style="padding:10px 16px 6px; font-size:12px; color:var(--text-3); font-weight:600;">🦵 Lower Body Strength · 55–65 min</div><div class="check-item " id="item-lw1" onclick="toggleCheck(&#39;2026-04-13&#39;,&#39;lw1&#39;)">
+        <div class="check-box"><div class="check-checkmark">✓</div></div>
+        <div class="check-content">
+          <div class="check-label">Warm-up: 5 min incline treadmill walk + leg swings &amp; hip circles</div>
+          
+        </div>
+        <div style="text-align:right;flex-shrink:0;margin-left:8px">
+          <div style="font-size:12px;font-weight:700;color:var(--text)">5 min</div>
+          <span class="cat-tag cat-warmup">warmup</span>
+        </div>
+      </div><div class="check-item " id="item-lw2" onclick="toggleCheck(&#39;2026-04-13&#39;,&#39;lw2&#39;)">
+        <div class="check-box"><div class="check-checkmark">✓</div></div>
+        <div class="check-content">
+          <div class="check-label">Barbell Back Squat (or Goblet Squat if new to barbell)</div>
+          <div class="check-sub">Primary compound — do not skip</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0;margin-left:8px">
+          <div style="font-size:12px;font-weight:700;color:var(--text)">4 × 10–12</div>
+          <span class="cat-tag cat-compound">compound</span>
+        </div>
+      </div><div class="check-item " id="item-lw3" onclick="toggleCheck(&#39;2026-04-13&#39;,&#39;lw3&#39;)">
+        <div class="check-box"><div class="check-checkmark">✓</div></div>
+        <div class="check-content">
+          <div class="check-label">Romanian Deadlift</div>
+          <div class="check-sub">Hinge movement — feel it in hamstrings</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0;margin-left:8px">
+          <div style="font-size:12px;font-weight:700;color:var(--text)">3 × 10–12</div>
+          <span class="cat-tag cat-compound">compound</span>
+        </div>
+      </div><div class="check-item " id="item-lw4" onclick="toggleCheck(&#39;2026-04-13&#39;,&#39;lw4&#39;)">
+        <div class="check-box"><div class="check-checkmark">✓</div></div>
+        <div class="check-content">
+          <div class="check-label">Hip Thrust / Barbell Glute Bridge</div>
+          <div class="check-sub">Most powerful glute exercise</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0;margin-left:8px">
+          <div style="font-size:12px;font-weight:700;color:var(--text)">4 × 12–15</div>
+          <span class="cat-tag cat-compound">compound</span>
+        </div>
+      </div><div class="check-item " id="item-lw5" onclick="toggleCheck(&#39;2026-04-13&#39;,&#39;lw5&#39;)">
+        <div class="check-box"><div class="check-checkmark">✓</div></div>
+        <div class="check-content">
+          <div class="check-label">Leg Press</div>
+          <div class="check-sub">Higher rep, drive through heels</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0;margin-left:8px">
+          <div style="font-size:12px;font-weight:700;color:var(--text)">3 × 12–15</div>
+          <span class="cat-tag cat-isolation">isolation</span>
+        </div>
+      </div><div class="check-item " id="item-lw6" onclick="toggleCheck(&#39;2026-04-13&#39;,&#39;lw6&#39;)">
+        <div class="check-box"><div class="check-checkmark">✓</div></div>
+        <div class="check-content">
+          <div class="check-label">Walking Lunges (hold dumbbells)</div>
+          
+        </div>
+        <div style="text-align:right;flex-shrink:0;margin-left:8px">
+          <div style="font-size:12px;font-weight:700;color:var(--text)">3 × 12 each leg</div>
+          <span class="cat-tag cat-compound">compound</span>
+        </div>
+      </div><div class="check-item " id="item-lw7" onclick="toggleCheck(&#39;2026-04-13&#39;,&#39;lw7&#39;)">
+        <div class="check-box"><div class="check-checkmark">✓</div></div>
+        <div class="check-content">
+          <div class="check-label">Seated Leg Curl</div>
+          
+        </div>
+        <div style="text-align:right;flex-shrink:0;margin-left:8px">
+          <div style="font-size:12px;font-weight:700;color:var(--text)">3 × 12–15</div>
+          <span class="cat-tag cat-isolation">isolation</span>
+        </div>
+      </div><div class="check-item " id="item-lw8" onclick="toggleCheck(&#39;2026-04-13&#39;,&#39;lw8&#39;)">
+        <div class="check-box"><div class="check-checkmark">✓</div></div>
+        <div class="check-content">
+          <div class="check-label">Standing Calf Raises</div>
+          <div class="check-sub">Slow and controlled</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0;margin-left:8px">
+          <div style="font-size:12px;font-weight:700;color:var(--text)">3 × 20</div>
+          <span class="cat-tag cat-isolation">isolation</span>
+        </div>
+      </div><div class="check-item " id="item-lw9" onclick="toggleCheck(&#39;2026-04-13&#39;,&#39;lw9&#39;)">
+        <div class="check-box"><div class="check-checkmark">✓</div></div>
+        <div class="check-content">
+          <div class="check-label">Finisher: 10 min stairmaster or incline treadmill (12–15% grade, brisk walk)</div>
+          
+        </div>
+        <div style="text-align:right;flex-shrink:0;margin-left:8px">
+          <div style="font-size:12px;font-weight:700;color:var(--text)">10 min</div>
+          <span class="cat-tag cat-finisher">finisher</span>
+        </div>
+      </div></div></div><div class="section">
+    <div class="section-header" onclick="toggleSection(&#39;supplements&#39;)">
+      <div class="section-title">💊 Supplements</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div class="section-progress">0/5</div>
+        <div class="section-toggle open">⌄</div>
+      </div>
+    </div>
+    <div class="section-body " id="section-body-supplements"><div class="check-item " id="item-s1" onclick="toggleCheck(&#39;2026-04-13&#39;,&#39;s1&#39;)">
+      <div class="check-box"><div class="check-checkmark">✓</div></div>
+      <div class="check-content">
+        <div class="check-label">🦠 Probiotic (10–50 billion CFU)</div>
+        <div class="check-sub">Gut health — important after stopping Ozempic</div>
+      </div>
+      <div class="check-time">8:00 AM</div>
+    </div><div class="check-item " id="item-s2" onclick="toggleCheck(&#39;2026-04-13&#39;,&#39;s2&#39;)">
+      <div class="check-box"><div class="check-checkmark">✓</div></div>
+      <div class="check-content">
+        <div class="check-label">💊 Creatine Monohydrate 5g</div>
+        <div class="check-sub">Stir into oats or protein shake. Most researched supplement — builds &amp; preserves muscle</div>
+      </div>
+      <div class="check-time">9:00 AM</div>
+    </div><div class="check-item " id="item-s3" onclick="toggleCheck(&#39;2026-04-13&#39;,&#39;s3&#39;)">
+      <div class="check-box"><div class="check-checkmark">✓</div></div>
+      <div class="check-content">
+        <div class="check-label">☀️ Vitamin D3 (2,000–4,000 IU) + K2 (100mcg)</div>
+        <div class="check-sub">Take with food. Critical for fat metabolism &amp; energy</div>
+      </div>
+      <div class="check-time">1:00 PM</div>
+    </div><div class="check-item " id="item-s4" onclick="toggleCheck(&#39;2026-04-13&#39;,&#39;s4&#39;)">
+      <div class="check-box"><div class="check-checkmark">✓</div></div>
+      <div class="check-content">
+        <div class="check-label">🐟 Omega-3 Fish Oil (2–3g EPA/DHA)</div>
+        <div class="check-sub">Take with dinner. Reduces inflammation, supports fat burning</div>
+      </div>
+      <div class="check-time">7:00 PM</div>
+    </div><div class="check-item " id="item-s5" onclick="toggleCheck(&#39;2026-04-13&#39;,&#39;s5&#39;)">
+      <div class="check-box"><div class="check-checkmark">✓</div></div>
+      <div class="check-content">
+        <div class="check-label">🌙 Magnesium Glycinate 300–400mg</div>
+        <div class="check-sub">Before bed. Improves sleep quality, lowers cortisol, reduces cravings</div>
+      </div>
+      <div class="check-time">9:00 PM</div>
+    </div></div></div><div class="section" style="margin-bottom:8px;">
+    <div class="section-header" onclick="toggleSection(&#39;notif&#39;)">
+      <div class="section-title">🔔 Reminders</div>
+      <div class="section-toggle open">⌄</div>
+    </div>
+    <div class="section-body " id="section-body-notif">
+      <div style="padding:14px 16px; font-size:13px; color:var(--text-2); line-height:1.6;">
+        <p>Tap the button below to enable reminders. Then add this app to your <strong>Home Screen</strong> for the best experience.</p>
+        <button onclick="requestNotifications()" style="margin-top:10px;width:100%;background:var(--green);color:white;border:none;border-radius:10px;padding:12px;font-size:14px;font-weight:700;cursor:pointer;">🔔 Enable Reminders</button>
+        <div style="margin-top:12px;font-weight:600;font-size:12px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.5px;">Scheduled reminder times:</div>
+        <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;" id="reminderChips">
+          <div style="background:var(--green-light);color:var(--green-dark);border-radius:20px;padding:6px 12px;font-size:12px;font-weight:600;">7:00 AM</div><div style="background:var(--green-light);color:var(--green-dark);border-radius:20px;padding:6px 12px;font-size:12px;font-weight:600;">9:00 AM</div><div style="background:var(--green-light);color:var(--green-dark);border-radius:20px;padding:6px 12px;font-size:12px;font-weight:600;">1:00 PM</div><div style="background:var(--green-light);color:var(--green-dark);border-radius:20px;padding:6px 12px;font-size:12px;font-weight:600;">3:30 PM</div><div style="background:var(--green-light);color:var(--green-dark);border-radius:20px;padding:6px 12px;font-size:12px;font-weight:600;">7:00 PM</div><div style="background:var(--green-light);color:var(--green-dark);border-radius:20px;padding:6px 12px;font-size:12px;font-weight:600;">9:00 PM</div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+    </div>
+    <!-- WEEK TAB -->
+    <div class="tab" id="tab-week">
+      <div id="weekContent"><div class="week-header">
+    <div class="week-title">📅 This Week</div>
+    <div class="week-grid"><div class="week-day today">
+      <div class="wd-name">MON</div>
+      <div class="wd-num">13</div>
+      <div class="wd-icon">🦵</div>
+      <div class="wd-dot empty"></div>
+    </div><div class="week-day future">
+      <div class="wd-name">TUE</div>
+      <div class="wd-num">14</div>
+      <div class="wd-icon">🏊‍♀️</div>
+      <div class="wd-dot empty"></div>
+    </div><div class="week-day future">
+      <div class="wd-name">WED</div>
+      <div class="wd-num">15</div>
+      <div class="wd-icon">💪</div>
+      <div class="wd-dot empty"></div>
+    </div><div class="week-day future">
+      <div class="wd-name">THU</div>
+      <div class="wd-num">16</div>
+      <div class="wd-icon">🏊‍♀️</div>
+      <div class="wd-dot empty"></div>
+    </div><div class="week-day future">
+      <div class="wd-name">FRI</div>
+      <div class="wd-num">17</div>
+      <div class="wd-icon">🏋️</div>
+      <div class="wd-dot empty"></div>
+    </div><div class="week-day future">
+      <div class="wd-name">SAT</div>
+      <div class="wd-num">18</div>
+      <div class="wd-icon">🏊‍♀️</div>
+      <div class="wd-dot empty"></div>
+    </div><div class="week-day future">
+      <div class="wd-name">SUN</div>
+      <div class="wd-num">19</div>
+      <div class="wd-icon">🚶‍♀️</div>
+      <div class="wd-dot empty"></div>
+    </div></div></div><div class="phase-card">
+    <div class="phase-card-title" style="color:var(--green-dark)">📋 12-Week Schedule</div><div class="phase-row">
+      <div><span style="font-weight:700">Weeks 1–4: Foundation Phase</span><br><span style="font-size:12px;color:var(--text-3)">Build consistency, establish habits, moderate intensity</span></div>
+    </div><div class="phase-row">
+      <div><span style="font-weight:700">Weeks 5–8: Progressive Phase</span><br><span style="font-size:12px;color:var(--text-3)">Increase weights 5–10%, add swim intervals</span></div>
+    </div><div class="phase-row">
+      <div><span style="font-weight:700">Weeks 9–12: Peak Phase</span><br><span style="font-size:12px;color:var(--text-3)">High intensity, max metabolic burn, final push</span></div>
+    </div></div><div class="phase-card">
+    <div class="phase-card-title">🔄 Weekly Pattern (Every Week)</div>
+    <div class="phase-row"><span style="font-weight:600">Monday</span><span style="color:var(--green)">🦵 Lower Body Strength</span></div>
+    <div class="phase-row"><span style="font-weight:600">Tuesday</span><span style="color:var(--blue)">🏊‍♀️ Swimming + 💪 Bodyweight Alt</span></div>
+    <div class="phase-row"><span style="font-weight:600">Wednesday</span><span style="color:var(--purple)">💪 Upper Body Strength</span></div>
+    <div class="phase-row"><span style="font-weight:600">Thursday</span><span style="color:var(--blue)">🏊‍♀️ Swimming + 💪 Bodyweight Alt</span></div>
+    <div class="phase-row"><span style="font-weight:600">Friday</span><span style="color:#EC4899">🏋️ Push Day (Chest/Shoulders/Tri)</span></div>
+    <div class="phase-row"><span style="font-weight:600">Saturday</span><span style="color:var(--blue)">🏊‍♀️ Swimming + 💪 Bodyweight Alt</span></div>
+    <div class="phase-row" style="border:none"><span style="font-weight:600">Sunday</span><span style="color:var(--gray)">🚶‍♀️ Active Rest (walk)</span></div>
+  </div></div>
+    </div>
+    <!-- PROGRESS TAB -->
+    <div class="tab" id="tab-progress">
+      <div id="progressContent"><div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-label">Start Weight</div>
+      <div class="stat-value">75</div>
+      <div class="stat-unit">kg</div>
+    </div>
+    <div class="stat-card ">
+      <div class="stat-label">Lost So Far</div>
+      <div class="stat-value">0.0</div>
+      <div class="stat-unit">kg</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Current</div>
+      <div class="stat-value">75</div>
+      <div class="stat-unit">kg</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">To Goal</div>
+      <div class="stat-value">13.0</div>
+      <div class="stat-unit">kg to go</div>
+    </div>
+  </div><div class="section" style="padding:16px; display:block;">
+    <div style="font-size:14px;font-weight:700;margin-bottom:10px;">🎯 Goal Progress: 75kg → 60–63kg</div>
+    <div style="background:var(--border);border-radius:10px;height:14px;overflow:hidden;">
+      <div style="background:var(--green);height:100%;border-radius:10px;width:0%;transition:width 0.5s;"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-3);margin-top:6px;">
+      <span>75kg (Start)</span><span>0% to goal</span><span>62kg (Goal)</span>
+    </div>
+  </div><div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-label">Day of Plan</div>
+      <div class="stat-value">1</div>
+      <div class="stat-unit">of 84</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Days Completed</div>
+      <div class="stat-value">0</div>
+      <div class="stat-unit">strong days</div>
+    </div>
+  </div><div class="weight-entry">
+    <label>⚖️ Log Today's Weight</label>
+    <div class="weight-row">
+      <input type="number" class="weight-input" id="weightInput" placeholder="e.g. 74.5" step="0.1" min="50" max="120">
+      <button class="weight-btn" onclick="logWeight()">Save</button>
+    </div></div><div class="info-section">
+    <div class="info-header" onclick="toggleInfoSection(&#39;proj&#39;)">
+      <div class="info-title">📈 Realistic Projection</div>
+      <div>⌄</div>
+    </div>
+    <div class="info-body hidden" id="info-body-proj">
+      <p>At a healthy rate of <strong>0.7–1kg per week</strong>, here's what to expect:</p>
+      <p><strong>Week 4 (May 11):</strong> ~71–72 kg</p>
+      <p><strong>Week 8 (June 8):</strong> ~68–70 kg</p>
+      <p><strong>Week 12 (July 6):</strong> ~65–67 kg</p>
+      <p style="color:var(--green-dark);font-weight:600">The final push to 60–63kg may take another 6–8 weeks beyond Week 12 — but you'll look and feel dramatically different by Day 84.</p>
+      <p>Note: Weeks 1–2 may show 2–3kg loss quickly (water weight + glycogen). This is normal and expected.</p>
+    </div>
+  </div></div>
+    </div>
+    <!-- INFO TAB -->
+    <div class="tab" id="tab-info">
+      <div id="infoContent"><div style="padding:12px 16px 0; font-size:13px; color:var(--text-3);">Your complete plan reference guide — tap any section to expand.</div><div class="info-section">
+      <div class="info-header" onclick="toggleInfoSection(&#39;ozempic&#39;)">
+        <div class="info-title">💉 Stopping Ozempic — Key Strategy</div>
+        <div style="color:var(--text-3);font-size:18px;transition:transform 0.2s;">⌄</div>
+      </div>
+      <div class="info-body hidden" id="info-body-ozempic">
+        <p>When stopping semaglutide, <strong>hunger will return within 1–2 weeks</strong>. Here's how to fight it:</p>
+      <ul>
+        <li><strong>Psyllium husk before meals</strong> — mimics Ozempic's gastric slowing effect</li>
+        <li><strong>High protein</strong> — your most powerful satiety tool (aim 135–145g/day)</li>
+        <li>Drink 400ml water 20–30 min before every meal</li>
+        <li>Always eat solid food at lunch — liquid meals digest too fast</li>
+        <li>Never eat from a bag or container — always portion out</li>
+        <li>Eat slowly: put your fork down between bites</li>
+        <li>The first 3–4 weeks are the hardest. Lock in habits and you'll be fine.</li>
+      </ul>
+      </div>
+    </div><div class="info-section">
+      <div class="info-header" onclick="toggleInfoSection(&#39;calories&#39;)">
+        <div class="info-title">🔢 Your Calorie &amp; Macro Targets</div>
+        <div style="color:var(--text-3);font-size:18px;transition:transform 0.2s;">⌄</div>
+      </div>
+      <div class="info-body hidden" id="info-body-calories">
+        <p><strong>Daily calorie target:</strong> 1,500–1,600 calories (500–600 cal deficit)</p>
+      <p><strong>Protein:</strong> 135–145g per day (critical for muscle preservation)</p>
+      <p><strong>Carbs:</strong> 140–160g per day</p>
+      <p><strong>Fat:</strong> 45–55g per day</p>
+      <p>Your BMR is ~1,440 cal. With your activity level (gym + swimming), maintenance is ~1,950–2,100 cal. A 500–600 cal daily deficit is the sweet spot — aggressive enough to lose weight, sustainable enough to preserve muscle.</p>
+      </div>
+    </div><div class="info-section">
+      <div class="info-header" onclick="toggleInfoSection(&#39;meals_info&#39;)">
+        <div class="info-title">🍽️ Meal Plan Explained</div>
+        <div style="color:var(--text-3);font-size:18px;transition:transform 0.2s;">⌄</div>
+      </div>
+      <div class="info-body hidden" id="info-body-meals_info">
+        <p><strong>Why I changed your plan:</strong></p>
+      <ul>
+        <li>Reduced overnight oats from 1 cup to ½ cup (saves 150 cal, 27g carbs)</li>
+        <li>Replaced oat vanilla milk with unsweetened almond milk (saves sugar)</li>
+        <li>Added chia seeds to breakfast (fiber, omega-3, more filling)</li>
+        <li>Replaced smoothie lunch with solid meal (solid food = 3x more satiating)</li>
+        <li>Increased dinner protein from 150g to 180–200g (more muscle preservation)</li>
+        <li>Added casein protein before bed (overnight muscle recovery)</li>
+        <li>Your 2% milk in coffee reduced from 1 cup to ¼ cup</li>
+      </ul>
+      <p><strong>Your dark chocolate stays.</strong> Sustainable habits beat perfect ones.</p>
+      </div>
+    </div><div class="info-section">
+      <div class="info-header" onclick="toggleInfoSection(&#39;supps_info&#39;)">
+        <div class="info-title">💊 Supplement Guide</div>
+        <div style="color:var(--text-3);font-size:18px;transition:transform 0.2s;">⌄</div>
+      </div>
+      <div class="info-body hidden" id="info-body-supps_info">
+        <ul>
+        <li><strong>Creatine 5g/day</strong> — most researched supplement. Preserves muscle during deficit. Doesn't cause bloating at this dose.</li>
+        <li><strong>Vitamin D3+K2</strong> — take together with food. K2 directs calcium to bones not arteries. Almost certainly deficient.</li>
+        <li><strong>Magnesium Glycinate</strong> — improves sleep, lowers cortisol, reduces cravings. Glycinate form is gentlest.</li>
+        <li><strong>Omega-3 Fish Oil</strong> — reduces inflammation, supports insulin sensitivity. Take with meals to avoid aftertaste.</li>
+        <li><strong>Psyllium Husk</strong> — your hunger control tool. 5g in water before meals.</li>
+        <li><strong>Probiotic</strong> — Ozempic affects gut motility. Help restore balance.</li>
+      </ul>
+      </div>
+    </div><div class="info-section">
+      <div class="info-header" onclick="toggleInfoSection(&#39;lifestyle&#39;)">
+        <div class="info-title">😴 Lifestyle Factors</div>
+        <div style="color:var(--text-3);font-size:18px;transition:transform 0.2s;">⌄</div>
+      </div>
+      <div class="info-body hidden" id="info-body-lifestyle">
+        <p><strong>Sleep (non-negotiable): 7–9 hours.</strong> Poor sleep increases hunger hormones by 15–20% and will undo your calorie deficit.</p>
+      <p><strong>Stress:</strong> High cortisol = fat storage, especially belly fat. Even 10 min of deep breathing after stressful events measurably reduces cortisol. Hot yoga once a week would be excellent.</p>
+      <p><strong>Weigh yourself:</strong> Once per week, Monday morning, after bathroom, before eating. NOT daily — scales fluctuate 1–2kg daily from water alone.</p>
+      <p><strong>Meal timing:</strong> Try to eat within a 10–12 hour window. If breakfast at 8am, finish dinner by 7–8pm.</p>
+      <p><strong>When progress slows:</strong> It will, around weeks 6–8. This is normal physiology, not failure. Stay consistent.</p>
+      </div>
+    </div><div class="info-section">
+      <div class="info-header" onclick="toggleInfoSection(&#39;tips&#39;)">
+        <div class="info-title">💡 Tips for Success</div>
+        <div style="color:var(--text-3);font-size:18px;transition:transform 0.2s;">⌄</div>
+      </div>
+      <div class="info-body hidden" id="info-body-tips">
+        <ul>
+        <li><strong>Meal prep Sunday:</strong> Cook proteins and chop veg for the week. Removes daily decision-making.</li>
+        <li><strong>Creatine loading:</strong> Don't bother with a loading phase — just take 5g daily from Day 1.</li>
+        <li><strong>Progressive overload:</strong> Every 2 weeks, increase weights by 2.5–5kg on major lifts.</li>
+        <li><strong>Rep tempo:</strong> 2 sec down, 1 sec hold, 1 sec up. Slower = more muscle activation.</li>
+        <li><strong>Rest between sets:</strong> 45–60 seconds (keeps heart rate up for more calories burned).</li>
+        <li><strong>Hot yoga:</strong> If you can add it back even once a week — excellent for cortisol and flexibility.</li>
+        <li><strong>Progress photos:</strong> Take them every 2 weeks. The scale lies; photos don't.</li>
+        <li><strong>Protein first:</strong> At every meal, eat your protein source first, then veg, then carbs.</li>
+      </ul>
+      </div>
+    </div></div>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <button class="nav-btn active" onclick="switchTab(&#39;today&#39;)" id="nav-today">
+      <span class="nav-icon">📋</span>Today
+    </button>
+    <button class="nav-btn" onclick="switchTab(&#39;week&#39;)" id="nav-week">
+      <span class="nav-icon">📅</span>Week
+    </button>
+    <button class="nav-btn" onclick="switchTab(&#39;progress&#39;)" id="nav-progress">
+      <span class="nav-icon">📊</span>Progress
+    </button>
+    <button class="nav-btn" onclick="switchTab(&#39;info&#39;)" id="nav-info">
+      <span class="nav-icon">📖</span>Info
+    </button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== PLAN DATA =====
+const PLAN_START = new Date(2026, 3, 13); // April 13, 2026
+
+const DAY_CONFIG = {
+  0: { type: 'rest',      label: 'Active Rest',         color: '#6B7280', icon: '🚶‍♀️', short: 'REST' },
+  1: { type: 'lower',     label: 'Lower Body Strength', color: '#10B981', icon: '🦵',   short: 'LOWER' },
+  2: { type: 'swim',      label: 'Swimming',            color: '#3B82F6', icon: '🏊‍♀️', short: 'SWIM' },
+  3: { type: 'upper',     label: 'Upper Body Strength', color: '#8B5CF6', icon: '💪',   short: 'UPPER' },
+  4: { type: 'swim',      label: 'Swimming',            color: '#3B82F6', icon: '🏊‍♀️', short: 'SWIM' },
+  5: { type: 'push',      label: 'Push Day',            color: '#EC4899', icon: '🏋️',  short: 'PUSH' },
+  6: { type: 'swim',      label: 'Swimming',            color: '#3B82F6', icon: '🏊‍♀️', short: 'SWIM' },
+};
+
+const MEALS = [
+  { id: 'm1', time: '7:00 AM', label: 'Drink 500ml water immediately on waking', sub: 'Room temp or warm — before anything else', cat: '💧', optional: false },
+  { id: 'm2', time: '7:05 AM', label: 'Psyllium husk: 5g stirred into 200ml water', sub: 'Stir fast, drink immediately — your Ozempic hunger replacement', cat: '🌿', optional: false },
+  { id: 'm3', time: '7:10 AM', label: 'Banana (pre-workout fuel)', sub: '1 medium banana', cat: '🍌', optional: false },
+  { id: 'm4', time: '7:15 AM', label: 'Coffee with 1/4 cup 2% milk + Splenda', sub: 'Reduce from 1 cup to 1/4 cup milk — saves ~60 cal', cat: '☕', optional: false },
+  { id: 'm5', time: '9:00 AM', label: 'Post-workout breakfast: Overnight oats', sub: '1/2 cup oats + 1 scoop Ghost Whey + 3/4 cup unsweetened almond milk + 1 tbsp chia seeds + cinnamon', cat: '🥣', optional: false },
+  { id: 'm6', time: '1:00 PM', label: 'Lunch (solid meal preferred)', sub: '150g grilled chicken/tuna + mixed salad + 1/2 cup quinoa or chickpeas + olive oil + lemon. OR smoothie: 1 cup blueberries + 1 scoop whey + 1/2 cup Greek yogurt + 1 tsp almond butter + psyllium husk + 1/2 cup almond milk', cat: '🥗', optional: false },
+  { id: 'm7', time: '3:30 PM', label: 'Optional snack (only if hungry)', sub: '150g plain Greek yogurt + berries + 1 tsp honey — OR — 2 rice cakes + 1 tbsp almond butter', cat: '🍓', optional: true },
+  { id: 'm8', time: '7:00 PM', label: 'Dinner: 180–200g protein + 250–300g vegetables', sub: 'Rotate: grilled salmon, chicken, turkey mince, white fish, lean beef, shrimp, or eggs. Veg: broccoli, spinach, zucchini, asparagus, green beans (roasted/steamed in 1 tsp olive oil)', cat: '🍽️', optional: false },
+  { id: 'm8b', time: '7:00 PM', label: 'Add 1/2 cup brown rice or sweet potato to dinner', sub: 'STRENGTH DAYS ONLY (Mon/Wed/Fri Push Day) — skip on swim days and rest days', cat: '🍠', optional: true },
+  { id: 'm9', time: '7:30 PM', label: '1–2 squares of 70%+ dark chocolate', sub: 'Your daily treat — keep it, it\'s sustainable!', cat: '🍫', optional: false },
+  { id: 'm10', time: '9:00 PM', label: 'Before bed: casein protein', sub: '200g cottage cheese OR 150g plain Greek yogurt — digests slowly overnight to preserve muscle', cat: '🥛', optional: false },
+];
+
+const SUPPLEMENTS = [
+  { id: 's1', time: '8:00 AM', label: 'Probiotic (10–50 billion CFU)', sub: 'Gut health — important after stopping Ozempic', cat: '🦠' },
+  { id: 's2', time: '9:00 AM', label: 'Creatine Monohydrate 5g', sub: 'Stir into oats or protein shake. Most researched supplement — builds & preserves muscle', cat: '💊' },
+  { id: 's3', time: '1:00 PM', label: 'Vitamin D3 (2,000–4,000 IU) + K2 (100mcg)', sub: 'Take with food. Critical for fat metabolism & energy', cat: '☀️' },
+  { id: 's4', time: '7:00 PM', label: 'Omega-3 Fish Oil (2–3g EPA/DHA)', sub: 'Take with dinner. Reduces inflammation, supports fat burning', cat: '🐟' },
+  { id: 's5', time: '9:00 PM', label: 'Magnesium Glycinate 300–400mg', sub: 'Before bed. Improves sleep quality, lowers cortisol, reduces cravings', cat: '🌙' },
+];
+
+const WORKOUTS = {
+  lower: {
+    label: '🦵 Lower Body Strength',
+    duration: '55–65 min',
+    exercises: [
+      { id: 'lw1', name: 'Warm-up: 5 min incline treadmill walk + leg swings & hip circles', sets: '', reps: '5 min', cat: 'warmup' },
+      { id: 'lw2', name: 'Barbell Back Squat (or Goblet Squat if new to barbell)', sets: '4', reps: '10–12', cat: 'compound', note: 'Primary compound — do not skip' },
+      { id: 'lw3', name: 'Romanian Deadlift', sets: '3', reps: '10–12', cat: 'compound', note: 'Hinge movement — feel it in hamstrings' },
+      { id: 'lw4', name: 'Hip Thrust / Barbell Glute Bridge', sets: '4', reps: '12–15', cat: 'compound', note: 'Most powerful glute exercise' },
+      { id: 'lw5', name: 'Leg Press', sets: '3', reps: '12–15', cat: 'isolation', note: 'Higher rep, drive through heels' },
+      { id: 'lw6', name: 'Walking Lunges (hold dumbbells)', sets: '3', reps: '12 each leg', cat: 'compound' },
+      { id: 'lw7', name: 'Seated Leg Curl', sets: '3', reps: '12–15', cat: 'isolation' },
+      { id: 'lw8', name: 'Standing Calf Raises', sets: '3', reps: '20', cat: 'isolation', note: 'Slow and controlled' },
+      { id: 'lw9', name: 'Finisher: 10 min stairmaster or incline treadmill (12–15% grade, brisk walk)', sets: '', reps: '10 min', cat: 'finisher' },
+    ]
+  },
+  upper: {
+    label: '💪 Upper Body Strength',
+    duration: '55–65 min',
+    exercises: [
+      { id: 'uw1', name: 'Warm-up: 5 min row machine + arm circles & band pull-aparts', sets: '', reps: '5 min', cat: 'warmup' },
+      { id: 'uw2', name: 'Lat Pulldown (wide grip)', sets: '4', reps: '10–12', cat: 'compound', note: 'Drives V-shape, burns most calories' },
+      { id: 'uw3', name: 'Dumbbell Bent-over Row', sets: '3', reps: '10–12 each arm', cat: 'compound', note: 'Squeeze back at top' },
+      { id: 'uw4', name: 'Dumbbell Chest Press (flat or slight incline)', sets: '3', reps: '10–12', cat: 'compound', note: 'Don\'t let elbows flare' },
+      { id: 'uw5', name: 'Seated Dumbbell Shoulder Press', sets: '3', reps: '10–12', cat: 'compound', note: 'Full range of motion' },
+      { id: 'uw6', name: 'Cable Face Pulls', sets: '3', reps: '15–20', cat: 'isolation', note: 'Critical for posture & shoulder health' },
+      { id: 'uw7', name: 'Bicep Curl (superset — no rest before next)', sets: '3', reps: '12', cat: 'isolation', note: 'Immediately go to tricep pushdown' },
+      { id: 'uw8', name: 'Tricep Pushdown (cable or band)', sets: '3', reps: '12', cat: 'isolation', note: 'Superset with bicep curl above' },
+      { id: 'uw9', name: 'Finisher: 3 rounds — 20 mountain climbers + 15 DB thrusters + 10 burpees (60s rest between rounds)', sets: '3', reps: 'rounds', cat: 'finisher' },
+    ]
+  },
+  push: {
+    label: '🏋️ Push Day (Chest, Shoulders, Triceps)',
+    duration: '55–65 min',
+    exercises: [
+      { id: 'pw1', name: 'Warm-up: 5 min row machine or bike + arm circles & band pull-aparts', sets: '', reps: '5 min', cat: 'warmup' },
+      { id: 'pw2', name: 'Incline Dumbbell Press', sets: '4', reps: '10–12', cat: 'compound', note: 'Primary upper chest builder — control the descent, feel the stretch' },
+      { id: 'pw3', name: 'Flat Dumbbell Bench Press (or Barbell if available)', sets: '3', reps: '10–12', cat: 'compound', note: 'Full chest activation — don\'t flare elbows, squeeze at top' },
+      { id: 'pw4', name: 'Seated Dumbbell Overhead Press', sets: '4', reps: '10–12', cat: 'compound', note: 'Builds shoulder strength & size — go as heavy as form allows' },
+      { id: 'pw5', name: 'Lateral Raises (dumbbells)', sets: '4', reps: '15–20', cat: 'isolation', note: 'Slow and controlled — no swinging, thumbs slightly down' },
+      { id: 'pw6', name: 'Cable Chest Fly (or Pec Deck machine)', sets: '3', reps: '12–15', cat: 'isolation', note: 'Feel the squeeze at center — constant tension throughout' },
+      { id: 'pw7', name: 'Tricep Rope Pushdown (cable)', sets: '3', reps: '12–15', cat: 'isolation', note: 'Separate the rope at the bottom — full extension every rep' },
+      { id: 'pw8', name: 'Overhead Tricep Extension (cable or dumbbell)', sets: '3', reps: '12', cat: 'isolation', note: 'Long head activation — keep elbows close to head' },
+      { id: 'pw9', name: 'Finisher: 10 min incline treadmill walk (12–15% grade) or stairmaster', sets: '', reps: '10 min', cat: 'finisher' },
+    ]
+  },
+  swim: {
+    label: '🏊‍♀️ Swimming',
+    duration: '35–45 min',
+    phases: {
+      1: [
+        { id: 'sw1a', name: 'Warm-up: easy freestyle or breaststroke', sets: '', reps: '10 min', cat: 'warmup' },
+        { id: 'sw2a', name: 'Continuous moderate pace (should be able to talk, but effortful)', sets: '', reps: '20 min', cat: 'main' },
+        { id: 'sw3a', name: 'Cool down: easy stroke', sets: '', reps: '5 min', cat: 'warmup' },
+      ],
+      2: [
+        { id: 'sw1b', name: 'Warm-up', sets: '', reps: '5 min', cat: 'warmup' },
+        { id: 'sw2b', name: '6 × 50m sprints (30 sec rest between each)', sets: '6', reps: '50m', cat: 'interval' },
+        { id: 'sw3b', name: 'Steady state swimming', sets: '', reps: '10 min', cat: 'main' },
+        { id: 'sw4b', name: '6 × 25m sprints (20 sec rest between each)', sets: '6', reps: '25m', cat: 'interval' },
+        { id: 'sw5b', name: 'Cool down', sets: '', reps: '5 min', cat: 'warmup' },
+      ],
+      3: [
+        { id: 'sw1c', name: 'Warm-up', sets: '', reps: '5 min', cat: 'warmup' },
+        { id: 'sw2c', name: '8 × 50m all-out sprints (30 sec rest between each)', sets: '8', reps: '50m', cat: 'interval' },
+        { id: 'sw3c', name: '3 × 100m moderate pace (45 sec rest)', sets: '3', reps: '100m', cat: 'interval' },
+        { id: 'sw4c', name: 'Cool down', sets: '', reps: '5 min', cat: 'warmup' },
+      ]
+    },
+    bodyweight: [
+      { id: 'bw1', name: 'Bodyweight Squat (slow tempo — 3 sec down)', sets: '3', reps: '20', cat: 'compound', note: 'No equipment needed — pause at bottom, drive through heels' },
+      { id: 'bw2', name: 'Push-ups (standard or incline on bench/edge)', sets: '3', reps: '15', cat: 'compound', note: 'Chest to floor, full extension — go slow' },
+      { id: 'bw3', name: 'Glute Bridges (bodyweight)', sets: '3', reps: '25', cat: 'compound', note: 'Squeeze glutes hard at top for 2 sec — great hip thrust alternative' },
+      { id: 'bw4', name: 'Reverse Lunges (alternating legs)', sets: '3', reps: '12 each leg', cat: 'compound', note: 'Upright torso, controlled descent' },
+      { id: 'bw5', name: 'Tricep Dips (bench, chair, or pool edge)', sets: '3', reps: '15', cat: 'isolation', note: 'Elbows close to body — full dip, full extension' },
+      { id: 'bw6', name: 'Plank Hold', sets: '3', reps: '45 sec', cat: 'main', note: 'Hips level, core braced — breathe steadily' },
+      { id: 'bw7', name: 'Superman Hold (floor back extension)', sets: '3', reps: '12 × 2 sec hold', cat: 'main', note: 'Lifts lower back & glutes — great for posture' },
+      { id: 'bw8', name: 'Single-leg Calf Raises (any step or kerb)', sets: '3', reps: '20 each leg', cat: 'isolation' },
+    ]
+  },
+  rest: {
+    label: '🚶‍♀️ Active Rest Day',
+    duration: '30–45 min',
+    exercises: [
+      { id: 'rw1', name: '30–45 minute walk at any comfortable pace — enjoy it!', sets: '', reps: '30–45 min', cat: 'main' },
+      { id: 'rw2', name: 'Optional: 10–15 min gentle stretching or foam rolling', sets: '', reps: 'optional', cat: 'warmup' },
+    ]
+  }
+};
+
+const WATER_GOAL = 10; // 10 × 300ml = 3L
+
+// ===== STATE =====
+let state = {
+  checks: {},      // { 'YYYY-MM-DD': { itemId: true } }
+  water: {},       // { 'YYYY-MM-DD': count }
+  weights: [],     // [{ date: 'YYYY-MM-DD', kg: 75 }]
+  notifEnabled: false,
+  installHintDismissed: false,
+  openSections: { meals: true, workout: true, supplements: false },
+  openInfoSections: {}
+};
+
+function loadState() {
+  try {
+    const saved = localStorage.getItem('hasi_health_v3');
+    if (saved) state = { ...state, ...JSON.parse(saved) };
+  } catch(e) {}
+}
+
+function saveState() {
+  try { localStorage.setItem('hasi_health_v3', JSON.stringify(state)); } catch(e) {}
+}
+
+// ===== DATE UTILS =====
+function today() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function dateKey(d) {
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function getDayNum(d) {
+  const start = new Date(PLAN_START);
+  start.setHours(0,0,0,0);
+  const target = new Date(d);
+  target.setHours(0,0,0,0);
+  return Math.floor((target - start) / 86400000) + 1;
+}
+
+function getWeekNum(d) {
+  const dayNum = getDayNum(d);
+  return Math.min(Math.max(Math.ceil(dayNum / 7), 1), 12);
+}
+
+function getPhase(weekNum) {
+  if (weekNum <= 4) return 1;
+  if (weekNum <= 8) return 2;
+  return 3;
+}
+
+function getDayConfig(d) {
+  return DAY_CONFIG[new Date(d).getDay()];
+}
+
+function formatDate(d) {
+  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return `${days[d.getDay()]}, ${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+}
+
+function isWorkoutDay(d) {
+  const type = getDayConfig(d).type;
+  return ['lower','upper','push'].includes(type);
+}
+
+// ===== TOGGLE CHECK =====
+function toggleCheck(dateStr, itemId) {
+  if (!state.checks[dateStr]) state.checks[dateStr] = {};
+  state.checks[dateStr][itemId] = !state.checks[dateStr][itemId];
+  saveState();
+  const el = document.getElementById(`item-${itemId}`);
+  if (el) {
+    el.classList.toggle('done', state.checks[dateStr][itemId]);
+    el.querySelector('.check-box').classList.add('pop');
+    setTimeout(() => el.querySelector('.check-box').classList.remove('pop'), 300);
+  }
+  updateProgressRing();
+  updateSectionProgress();
+  if (state.checks[dateStr][itemId]) showToast('✓ Checked off!');
+}
+
+function toggleWater(dateStr, idx) {
+  const current = state.water[dateStr] || 0;
+  if (idx < current) {
+    state.water[dateStr] = idx;
+  } else {
+    state.water[dateStr] = idx + 1;
+  }
+  saveState();
+  renderWater(dateStr);
+  if (state.water[dateStr] === WATER_GOAL) showToast('💧 3L goal reached! Amazing!');
+}
+
+// ===== PROGRESS CALCULATIONS =====
+function getDayProgress(dateStr) {
+  const d = new Date(dateStr);
+  const cfg = getDayConfig(d);
+  const checks = state.checks[dateStr] || {};
+  const allItems = getAllItems(d, cfg.type);
+  const required = allItems.filter(x => !x.optional);
+  const done = required.filter(x => checks[x.id]);
+  const water = state.water[dateStr] || 0;
+  const totalRequired = required.length + 1; // +1 for water
+  const totalDone = done.length + (water >= WATER_GOAL ? 1 : 0);
+  return Math.round((totalDone / totalRequired) * 100);
+}
+
+function getAllItems(d, type) {
+  const wk = getWorkoutExercises(type, getPhase(getWeekNum(d)));
+  return [...MEALS, ...SUPPLEMENTS, ...wk];
+}
+
+function getWorkoutExercises(type, phase) {
+  const w = WORKOUTS[type];
+  if (!w) return [];
+  if (type === 'swim') return w.phases[phase] || [];
+  return w.exercises || [];
+}
+
+// ===== RENDER FUNCTIONS =====
+function render() {
+  const now = new Date();
+  const todayStr = today();
+  const dayNum = getDayNum(now);
+  const weekNum = getWeekNum(now);
+  const phase = getPhase(weekNum);
+  const cfg = getDayConfig(now);
+
+  // Header
+  document.getElementById('headerDate').textContent = formatDate(now);
+  document.getElementById('headerBadge').textContent = `Week ${weekNum} • Day ${dayNum}`;
+
+  renderToday(now, todayStr, weekNum, phase, cfg);
+  renderWeek();
+  renderProgress();
+  renderInfo();
+}
+
+function renderToday(now, todayStr, weekNum, phase, cfg) {
+  const checks = state.checks[todayStr] || {};
+  let html = '';
+
+  // Install hint
+  if (!state.installHintDismissed) {
+    html += `<div class="install-hint">
+      <div style="font-size:20px">📱</div>
+      <div>
+        <strong>Add to Home Screen</strong> to use like a native app!<br>
+        <em>iOS:</em> Tap Share → "Add to Home Screen"<br>
+        <em>Android:</em> Tap Menu → "Add to Home Screen"
+      </div>
+      <button class="install-hint-dismiss" onclick="dismissInstallHint()">✕</button>
+    </div>`;
+  }
+
+  // Progress ring
+  const pct = getDayProgress(todayStr);
+  const r = 34, circ = 2 * Math.PI * r;
+  const offset = circ - (pct / 100) * circ;
+  html += `<div class="progress-card">
+    <div class="ring-wrap">
+      <svg class="ring-svg" width="80" height="80" viewBox="0 0 80 80">
+        <circle class="ring-bg" cx="40" cy="40" r="${r}"/>
+        <circle class="ring-fg" id="ringFg" cx="40" cy="40" r="${r}"
+          stroke-dasharray="${circ}" stroke-dashoffset="${offset}"/>
+      </svg>
+      <div class="ring-text" id="ringPct">${pct}%</div>
+    </div>
+    <div class="progress-info">
+      <div class="progress-day">Day ${getDayNum(now)} of 84</div>
+      <div class="progress-week">Week ${weekNum} · Phase ${phase} ${['','Foundation','Progressive','Peak'][phase]}</div>
+      <div class="progress-type">${cfg.icon} ${cfg.label}</div>
+    </div>
+  </div>`;
+
+  // 12-week streak dots
+  const dots = Array.from({length: 84}, (_,i) => {
+    const d = new Date(PLAN_START);
+    d.setDate(d.getDate() + i);
+    const dk = dateKey(d);
+    const prog = getDayProgress(dk);
+    if (d > now) return '<div class="streak-dot"></div>';
+    if (prog >= 70) return '<div class="streak-dot done"></div>';
+    if (prog >= 30) return '<div class="streak-dot" style="background:var(--amber)"></div>';
+    return '<div class="streak-dot" style="background:var(--border)"></div>';
+  }).join('');
+  html += `<div class="streak-bar" style="margin:8px 16px 12px;">${dots}</div>`;
+
+  // Water tracker
+  const waterCount = state.water[todayStr] || 0;
+  let glasses = '';
+  for(let i = 0; i < WATER_GOAL; i++) {
+    glasses += `<div class="water-glass ${i < waterCount ? 'filled' : ''}" onclick="toggleWater('${todayStr}', ${i})">
+      <div class="water-glass-icon">${i < waterCount ? '💧' : '○'}</div>
+    </div>`;
+  }
+  html += `<div class="water-section">
+    <div class="water-title">💧 Water Tracker</div>
+    <div class="water-glasses" id="waterGlasses">${glasses}</div>
+    <div class="water-label">${waterCount}/${WATER_GOAL} glasses (goal: 3L)</div>
+  </div>`;
+
+  // Meals section
+  const mealItems = MEALS.filter(m => !(m.id === 'm8b' && !isWorkoutDay(now)));
+  const mealDone = mealItems.filter(m => !m.optional && checks[m.id]).length;
+  const mealTotal = mealItems.filter(m => !m.optional).length;
+  const mealsOpen = state.openSections.meals !== false;
+  html += `<div class="section">
+    <div class="section-header" onclick="toggleSection('meals')">
+      <div class="section-title">🍽️ Meals & Nutrition <span class="phase-badge phase-${phase}">Phase ${phase}</span></div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div class="section-progress">${mealDone}/${mealTotal}</div>
+        <div class="section-toggle ${mealsOpen ? 'open' : ''}">⌄</div>
+      </div>
+    </div>
+    <div class="section-body ${mealsOpen ? '' : 'hidden'}" id="section-body-meals">`;
+  mealItems.forEach(m => {
+    const done = !!checks[m.id];
+    html += `<div class="check-item ${done ? 'done' : ''} ${m.optional ? 'optional' : ''}" id="item-${m.id}" onclick="toggleCheck('${todayStr}','${m.id}')">
+      <div class="check-box"><div class="check-checkmark">✓</div></div>
+      <div class="check-content">
+        <div class="check-label">${m.cat} ${m.label}${m.optional ? ' <em style="font-size:11px;color:var(--text-3)">(optional)</em>' : ''}</div>
+        <div class="check-sub">${m.sub}</div>
+      </div>
+      <div class="check-time">${m.time}</div>
+    </div>`;
+  });
+  html += `</div></div>`;
+
+  // Workout section
+  const workoutType = cfg.type;
+  const exercises = getWorkoutExercises(workoutType, phase);
+  const exDone = exercises.filter(e => checks[e.id]).length;
+  const workoutOpen = state.openSections.workout !== false;
+  const workoutInfo = WORKOUTS[workoutType];
+  const phaseLabel = phase === 1 ? 'Weeks 1–4' : phase === 2 ? 'Weeks 5–8' : 'Weeks 9–12';
+  html += `<div class="section">
+    <div class="section-header" onclick="toggleSection('workout')">
+      <div class="section-title">${cfg.icon} Today's Workout <span class="phase-badge phase-${phase}">${phaseLabel}</span></div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div class="section-progress">${exDone}/${exercises.length}</div>
+        <div class="section-toggle ${workoutOpen ? 'open' : ''}">⌄</div>
+      </div>
+    </div>
+    <div class="section-body ${workoutOpen ? '' : 'hidden'}" id="section-body-workout">`;
+
+  if (exercises.length === 0) {
+    html += `<div class="empty">Rest day — no exercises scheduled!</div>`;
+  } else {
+    html += `<div style="padding:10px 16px 6px; font-size:12px; color:var(--text-3); font-weight:600;">${workoutInfo.label} · ${workoutInfo.duration}</div>`;
+    exercises.forEach(e => {
+      const done = !!checks[e.id];
+      const setRep = e.sets ? `${e.sets} × ${e.reps}` : e.reps;
+      const catClass = `cat-tag cat-${e.cat}`;
+      html += `<div class="check-item ${done ? 'done' : ''}" id="item-${e.id}" onclick="toggleCheck('${todayStr}','${e.id}')">
+        <div class="check-box"><div class="check-checkmark">✓</div></div>
+        <div class="check-content">
+          <div class="check-label">${e.name}</div>
+          ${e.note ? `<div class="check-sub">${e.note}</div>` : ''}
+        </div>
+        <div style="text-align:right;flex-shrink:0;margin-left:8px">
+          <div style="font-size:12px;font-weight:700;color:var(--text)">${setRep}</div>
+          <span class="${catClass}">${e.cat.replace('_',' ')}</span>
+        </div>
+      </div>`;
+    });
+  }
+  html += `</div></div>`;
+
+  // Bodyweight alternative section for swim days
+  if (workoutType === 'swim') {
+    const bwExercises = WORKOUTS.swim.bodyweight || [];
+    const bwDone = bwExercises.filter(e => checks[e.id]).length;
+    const bwOpen = state.openSections.bodyweight !== false;
+    html += `<div class="section">
+      <div class="section-header" onclick="toggleSection('bodyweight')">
+        <div class="section-title">💪 No-Equipment Alternative <span style="font-size:11px;font-weight:500;color:var(--text-3);margin-left:4px">~25 min</span></div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <div class="section-progress">${bwDone}/${bwExercises.length}</div>
+          <div class="section-toggle ${bwOpen ? 'open' : ''}">⌄</div>
+        </div>
+      </div>
+      <div class="section-body ${bwOpen ? '' : 'hidden'}" id="section-body-bodyweight">
+        <div style="padding:10px 16px 6px; font-size:12px; color:var(--text-3); font-weight:600;">🏠 Bodyweight only — do before or after swimming if gym is packed</div>`;
+    bwExercises.forEach(e => {
+      const done = !!checks[e.id];
+      const setRep = e.sets ? `${e.sets} × ${e.reps}` : e.reps;
+      const catClass = `cat-tag cat-${e.cat}`;
+      html += `<div class="check-item ${done ? 'done' : ''}" id="item-${e.id}" onclick="toggleCheck('${todayStr}','${e.id}')">
+        <div class="check-box"><div class="check-checkmark">✓</div></div>
+        <div class="check-content">
+          <div class="check-label">${e.name}</div>
+          ${e.note ? `<div class="check-sub">${e.note}</div>` : ''}
+        </div>
+        <div style="text-align:right;flex-shrink:0;margin-left:8px">
+          <div style="font-size:12px;font-weight:700;color:var(--text)">${setRep}</div>
+          <span class="${catClass}">${e.cat.replace('_',' ')}</span>
+        </div>
+      </div>`;
+    });
+    html += `</div></div>`;
+  }
+
+  // Supplements
+  const supDone = SUPPLEMENTS.filter(s => checks[s.id]).length;
+  const supOpen = state.openSections.supplements !== false;
+  html += `<div class="section">
+    <div class="section-header" onclick="toggleSection('supplements')">
+      <div class="section-title">💊 Supplements</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div class="section-progress">${supDone}/${SUPPLEMENTS.length}</div>
+        <div class="section-toggle ${supOpen ? 'open' : ''}">⌄</div>
+      </div>
+    </div>
+    <div class="section-body ${supOpen ? '' : 'hidden'}" id="section-body-supplements">`;
+  SUPPLEMENTS.forEach(s => {
+    const done = !!checks[s.id];
+    html += `<div class="check-item ${done ? 'done' : ''}" id="item-${s.id}" onclick="toggleCheck('${todayStr}','${s.id}')">
+      <div class="check-box"><div class="check-checkmark">✓</div></div>
+      <div class="check-content">
+        <div class="check-label">${s.cat} ${s.label}</div>
+        <div class="check-sub">${s.sub}</div>
+      </div>
+      <div class="check-time">${s.time}</div>
+    </div>`;
+  });
+  html += `</div></div>`;
+
+  // Notification section
+  html += `<div class="section" style="margin-bottom:8px;">
+    <div class="section-header" onclick="toggleSection('notif')">
+      <div class="section-title">🔔 Reminders</div>
+      <div class="section-toggle ${state.openSections.notif ? 'open' : ''}">⌄</div>
+    </div>
+    <div class="section-body ${state.openSections.notif ? '' : 'hidden'}" id="section-body-notif">
+      <div style="padding:14px 16px; font-size:13px; color:var(--text-2); line-height:1.6;">
+        <p>Tap the button below to enable reminders. Then add this app to your <strong>Home Screen</strong> for the best experience.</p>
+        <button onclick="requestNotifications()" style="margin-top:10px;width:100%;background:var(--green);color:white;border:none;border-radius:10px;padding:12px;font-size:14px;font-weight:700;cursor:pointer;">🔔 Enable Reminders</button>
+        <div style="margin-top:12px;font-weight:600;font-size:12px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.5px;">Scheduled reminder times:</div>
+        <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;" id="reminderChips">
+          ${['7:00 AM','9:00 AM','1:00 PM','3:30 PM','7:00 PM','9:00 PM'].map(t =>
+            `<div style="background:var(--green-light);color:var(--green-dark);border-radius:20px;padding:6px 12px;font-size:12px;font-weight:600;">${t}</div>`
+          ).join('')}
+        </div>
+      </div>
+    </div>
+  </div>`;
+
+  document.getElementById('todayContent').innerHTML = html;
+}
+
+function renderWater(dateStr) {
+  const waterCount = state.water[dateStr] || 0;
+  let glasses = '';
+  for(let i = 0; i < WATER_GOAL; i++) {
+    glasses += `<div class="water-glass ${i < waterCount ? 'filled' : ''}" onclick="toggleWater('${dateStr}', ${i})">
+      <div class="water-glass-icon">${i < waterCount ? '💧' : '○'}</div>
+    </div>`;
+  }
+  const el = document.getElementById('waterGlasses');
+  if (el) el.innerHTML = glasses;
+  const label = el?.parentElement?.querySelector('.water-label');
+  if (label) label.textContent = `${waterCount}/${WATER_GOAL} glasses (goal: 3L)`;
+}
+
+function updateProgressRing() {
+  const todayStr = today();
+  const pct = getDayProgress(todayStr);
+  const r = 34, circ = 2 * Math.PI * r;
+  const offset = circ - (pct / 100) * circ;
+  const fg = document.getElementById('ringFg');
+  const txt = document.getElementById('ringPct');
+  if (fg) fg.setAttribute('stroke-dashoffset', offset);
+  if (txt) txt.textContent = `${pct}%`;
+}
+
+function updateSectionProgress() {
+  const todayStr = today();
+  const checks = state.checks[todayStr] || {};
+  // Meals
+  const mealItems = MEALS.filter(m => !m.optional);
+  const mDone = mealItems.filter(m => checks[m.id]).length;
+  // Supplements
+  const sDone = SUPPLEMENTS.filter(s => checks[s.id]).length;
+}
+
+function renderWeek() {
+  const now = new Date();
+  const weekStart = new Date(now);
+  weekStart.setDate(now.getDate() - now.getDay() + 1); // Monday
+  if (now.getDay() === 0) weekStart.setDate(weekStart.getDate() - 6);
+
+  let html = `<div class="week-header">
+    <div class="week-title">📅 This Week</div>
+    <div class="week-grid">`;
+
+  const dayNames = ['MON','TUE','WED','THU','FRI','SAT','SUN'];
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(weekStart);
+    d.setDate(weekStart.getDate() + i);
+    const dk = dateKey(d);
+    const isToday = dk === today();
+    const isPast = d < now && !isToday;
+    const isFuture = d > now;
+    const cfg = getDayConfig(d);
+    const pct = getDayProgress(dk);
+    let dotClass = 'empty';
+    if (!isFuture) {
+      if (pct >= 70) dotClass = 'complete';
+      else if (pct >= 30) dotClass = 'partial';
+    }
+    html += `<div class="week-day ${isToday ? 'today' : isPast ? 'past' : 'future'}">
+      <div class="wd-name">${dayNames[i]}</div>
+      <div class="wd-num">${d.getDate()}</div>
+      <div class="wd-icon">${cfg.icon}</div>
+      <div class="wd-dot ${dotClass}"></div>
+    </div>`;
+  }
+  html += `</div></div>`;
+
+  // Full 12-week overview
+  html += `<div class="phase-card">
+    <div class="phase-card-title" style="color:var(--green-dark)">📋 12-Week Schedule</div>`;
+  const phases = [
+    { weeks: '1–4', label: 'Foundation Phase', desc: 'Build consistency, establish habits, moderate intensity' },
+    { weeks: '5–8', label: 'Progressive Phase', desc: 'Increase weights 5–10%, add swim intervals' },
+    { weeks: '9–12', label: 'Peak Phase', desc: 'High intensity, max metabolic burn, final push' },
+  ];
+  phases.forEach(p => {
+    html += `<div class="phase-row">
+      <div><span style="font-weight:700">Weeks ${p.weeks}: ${p.label}</span><br><span style="font-size:12px;color:var(--text-3)">${p.desc}</span></div>
+    </div>`;
+  });
+  html += `</div>`;
+
+  // Weekly pattern
+  html += `<div class="phase-card">
+    <div class="phase-card-title">🔄 Weekly Pattern (Every Week)</div>
+    <div class="phase-row"><span style="font-weight:600">Monday</span><span style="color:var(--green)">🦵 Lower Body Strength</span></div>
+    <div class="phase-row"><span style="font-weight:600">Tuesday</span><span style="color:var(--blue)">🏊‍♀️ Swimming + 💪 Bodyweight Alt</span></div>
+    <div class="phase-row"><span style="font-weight:600">Wednesday</span><span style="color:var(--purple)">💪 Upper Body Strength</span></div>
+    <div class="phase-row"><span style="font-weight:600">Thursday</span><span style="color:var(--blue)">🏊‍♀️ Swimming + 💪 Bodyweight Alt</span></div>
+    <div class="phase-row"><span style="font-weight:600">Friday</span><span style="color:#EC4899">🏋️ Push Day (Chest/Shoulders/Tri)</span></div>
+    <div class="phase-row"><span style="font-weight:600">Saturday</span><span style="color:var(--blue)">🏊‍♀️ Swimming + 💪 Bodyweight Alt</span></div>
+    <div class="phase-row" style="border:none"><span style="font-weight:600">Sunday</span><span style="color:var(--gray)">🚶‍♀️ Active Rest (walk)</span></div>
+  </div>`;
+
+  document.getElementById('weekContent').innerHTML = html;
+}
+
+function renderProgress() {
+  const now = new Date();
+  const dayNum = Math.max(1, getDayNum(now));
+  const startWeight = 75;
+  const goalWeight = 62;
+  const latestWeight = state.weights.length > 0
+    ? state.weights[state.weights.length - 1].kg
+    : startWeight;
+  const lostSoFar = startWeight - latestWeight;
+  const toGo = latestWeight - goalWeight;
+
+  let html = '';
+
+  // Stats grid
+  html += `<div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-label">Start Weight</div>
+      <div class="stat-value">75</div>
+      <div class="stat-unit">kg</div>
+    </div>
+    <div class="stat-card ${lostSoFar > 0 ? 'highlight' : ''}">
+      <div class="stat-label">Lost So Far</div>
+      <div class="stat-value">${lostSoFar.toFixed(1)}</div>
+      <div class="stat-unit">kg</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Current</div>
+      <div class="stat-value">${latestWeight}</div>
+      <div class="stat-unit">kg</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">To Goal</div>
+      <div class="stat-value">${toGo > 0 ? toGo.toFixed(1) : '🎉'}</div>
+      <div class="stat-unit">${toGo > 0 ? 'kg to go' : 'Goal reached!'}</div>
+    </div>
+  </div>`;
+
+  // Goal progress bar
+  const progressPct = Math.min(100, Math.max(0, (lostSoFar / (startWeight - goalWeight)) * 100));
+  html += `<div class="section" style="padding:16px; display:block;">
+    <div style="font-size:14px;font-weight:700;margin-bottom:10px;">🎯 Goal Progress: 75kg → 60–63kg</div>
+    <div style="background:var(--border);border-radius:10px;height:14px;overflow:hidden;">
+      <div style="background:var(--green);height:100%;border-radius:10px;width:${progressPct}%;transition:width 0.5s;"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-3);margin-top:6px;">
+      <span>75kg (Start)</span><span>${progressPct.toFixed(0)}% to goal</span><span>62kg (Goal)</span>
+    </div>
+  </div>`;
+
+  // Days completed
+  const completedDays = Array.from({length: dayNum}, (_,i) => {
+    const d = new Date(PLAN_START);
+    d.setDate(d.getDate() + i);
+    return getDayProgress(dateKey(d));
+  }).filter(p => p >= 60).length;
+
+  html += `<div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-label">Day of Plan</div>
+      <div class="stat-value">${dayNum}</div>
+      <div class="stat-unit">of 84</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Days Completed</div>
+      <div class="stat-value">${completedDays}</div>
+      <div class="stat-unit">strong days</div>
+    </div>
+  </div>`;
+
+  // Weight entry
+  html += `<div class="weight-entry">
+    <label>⚖️ Log Today's Weight</label>
+    <div class="weight-row">
+      <input type="number" class="weight-input" id="weightInput" placeholder="e.g. 74.5" step="0.1" min="50" max="120">
+      <button class="weight-btn" onclick="logWeight()">Save</button>
+    </div>`;
+
+  if (state.weights.length > 0) {
+    html += `<div class="weight-log">`;
+    const recent = [...state.weights].reverse().slice(0, 10);
+    recent.forEach(w => {
+      const diff = w.kg - startWeight;
+      const color = diff < 0 ? 'var(--green)' : diff > 0 ? 'var(--red)' : 'var(--gray)';
+      const sign = diff < 0 ? '' : '+';
+      html += `<div class="weight-log-item">
+        <span style="font-weight:500">${w.date}</span>
+        <span style="font-weight:700">${w.kg} kg</span>
+        <span style="color:${color};font-weight:600">${sign}${diff.toFixed(1)} kg</span>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+  html += `</div>`;
+
+  // Realistic projection
+  html += `<div class="info-section">
+    <div class="info-header" onclick="toggleInfoSection('proj')">
+      <div class="info-title">📈 Realistic Projection</div>
+      <div>⌄</div>
+    </div>
+    <div class="info-body ${state.openInfoSections.proj ? '' : 'hidden'}" id="info-body-proj">
+      <p>At a healthy rate of <strong>0.7–1kg per week</strong>, here's what to expect:</p>
+      <p><strong>Week 4 (May 11):</strong> ~71–72 kg</p>
+      <p><strong>Week 8 (June 8):</strong> ~68–70 kg</p>
+      <p><strong>Week 12 (July 6):</strong> ~65–67 kg</p>
+      <p style="color:var(--green-dark);font-weight:600">The final push to 60–63kg may take another 6–8 weeks beyond Week 12 — but you'll look and feel dramatically different by Day 84.</p>
+      <p>Note: Weeks 1–2 may show 2–3kg loss quickly (water weight + glycogen). This is normal and expected.</p>
+    </div>
+  </div>`;
+
+  document.getElementById('progressContent').innerHTML = html;
+}
+
+function renderInfo() {
+  const sections = [
+    {
+      id: 'ozempic', icon: '💉', title: 'Stopping Ozempic — Key Strategy',
+      content: `<p>When stopping semaglutide, <strong>hunger will return within 1–2 weeks</strong>. Here's how to fight it:</p>
+      <ul>
+        <li><strong>Psyllium husk before meals</strong> — mimics Ozempic's gastric slowing effect</li>
+        <li><strong>High protein</strong> — your most powerful satiety tool (aim 135–145g/day)</li>
+        <li>Drink 400ml water 20–30 min before every meal</li>
+        <li>Always eat solid food at lunch — liquid meals digest too fast</li>
+        <li>Never eat from a bag or container — always portion out</li>
+        <li>Eat slowly: put your fork down between bites</li>
+        <li>The first 3–4 weeks are the hardest. Lock in habits and you'll be fine.</li>
+      </ul>`
+    },
+    {
+      id: 'calories', icon: '🔢', title: 'Your Calorie & Macro Targets',
+      content: `<p><strong>Daily calorie target:</strong> 1,500–1,600 calories (500–600 cal deficit)</p>
+      <p><strong>Protein:</strong> 135–145g per day (critical for muscle preservation)</p>
+      <p><strong>Carbs:</strong> 140–160g per day</p>
+      <p><strong>Fat:</strong> 45–55g per day</p>
+      <p>Your BMR is ~1,440 cal. With your activity level (gym + swimming), maintenance is ~1,950–2,100 cal. A 500–600 cal daily deficit is the sweet spot — aggressive enough to lose weight, sustainable enough to preserve muscle.</p>`
+    },
+    {
+      id: 'meals_info', icon: '🍽️', title: 'Meal Plan Explained',
+      content: `<p><strong>Why I changed your plan:</strong></p>
+      <ul>
+        <li>Reduced overnight oats from 1 cup to ½ cup (saves 150 cal, 27g carbs)</li>
+        <li>Replaced oat vanilla milk with unsweetened almond milk (saves sugar)</li>
+        <li>Added chia seeds to breakfast (fiber, omega-3, more filling)</li>
+        <li>Replaced smoothie lunch with solid meal (solid food = 3x more satiating)</li>
+        <li>Increased dinner protein from 150g to 180–200g (more muscle preservation)</li>
+        <li>Added casein protein before bed (overnight muscle recovery)</li>
+        <li>Your 2% milk in coffee reduced from 1 cup to ¼ cup</li>
+      </ul>
+      <p><strong>Your dark chocolate stays.</strong> Sustainable habits beat perfect ones.</p>`
+    },
+    {
+      id: 'supps_info', icon: '💊', title: 'Supplement Guide',
+      content: `<ul>
+        <li><strong>Creatine 5g/day</strong> — most researched supplement. Preserves muscle during deficit. Doesn't cause bloating at this dose.</li>
+        <li><strong>Vitamin D3+K2</strong> — take together with food. K2 directs calcium to bones not arteries. Almost certainly deficient.</li>
+        <li><strong>Magnesium Glycinate</strong> — improves sleep, lowers cortisol, reduces cravings. Glycinate form is gentlest.</li>
+        <li><strong>Omega-3 Fish Oil</strong> — reduces inflammation, supports insulin sensitivity. Take with meals to avoid aftertaste.</li>
+        <li><strong>Psyllium Husk</strong> — your hunger control tool. 5g in water before meals.</li>
+        <li><strong>Probiotic</strong> — Ozempic affects gut motility. Help restore balance.</li>
+      </ul>`
+    },
+    {
+      id: 'lifestyle', icon: '😴', title: 'Lifestyle Factors',
+      content: `<p><strong>Sleep (non-negotiable): 7–9 hours.</strong> Poor sleep increases hunger hormones by 15–20% and will undo your calorie deficit.</p>
+      <p><strong>Stress:</strong> High cortisol = fat storage, especially belly fat. Even 10 min of deep breathing after stressful events measurably reduces cortisol. Hot yoga once a week would be excellent.</p>
+      <p><strong>Weigh yourself:</strong> Once per week, Monday morning, after bathroom, before eating. NOT daily — scales fluctuate 1–2kg daily from water alone.</p>
+      <p><strong>Meal timing:</strong> Try to eat within a 10–12 hour window. If breakfast at 8am, finish dinner by 7–8pm.</p>
+      <p><strong>When progress slows:</strong> It will, around weeks 6–8. This is normal physiology, not failure. Stay consistent.</p>`
+    },
+    {
+      id: 'tips', icon: '💡', title: 'Tips for Success',
+      content: `<ul>
+        <li><strong>Meal prep Sunday:</strong> Cook proteins and chop veg for the week. Removes daily decision-making.</li>
+        <li><strong>Creatine loading:</strong> Don't bother with a loading phase — just take 5g daily from Day 1.</li>
+        <li><strong>Progressive overload:</strong> Every 2 weeks, increase weights by 2.5–5kg on major lifts.</li>
+        <li><strong>Rep tempo:</strong> 2 sec down, 1 sec hold, 1 sec up. Slower = more muscle activation.</li>
+        <li><strong>Rest between sets:</strong> 45–60 seconds (keeps heart rate up for more calories burned).</li>
+        <li><strong>Hot yoga:</strong> If you can add it back even once a week — excellent for cortisol and flexibility.</li>
+        <li><strong>Progress photos:</strong> Take them every 2 weeks. The scale lies; photos don't.</li>
+        <li><strong>Protein first:</strong> At every meal, eat your protein source first, then veg, then carbs.</li>
+      </ul>`
+    },
+  ];
+
+  let html = `<div style="padding:12px 16px 0; font-size:13px; color:var(--text-3);">Your complete plan reference guide — tap any section to expand.</div>`;
+
+  sections.forEach(s => {
+    const open = !!state.openInfoSections[s.id];
+    html += `<div class="info-section">
+      <div class="info-header" onclick="toggleInfoSection('${s.id}')">
+        <div class="info-title">${s.icon} ${s.title}</div>
+        <div style="color:var(--text-3);font-size:18px;transition:transform 0.2s;${open ? 'transform:rotate(180deg)' : ''}">⌄</div>
+      </div>
+      <div class="info-body ${open ? '' : 'hidden'}" id="info-body-${s.id}">
+        ${s.content}
+      </div>
+    </div>`;
+  });
+
+  document.getElementById('infoContent').innerHTML = html;
+}
+
+// ===== UI ACTIONS =====
+let currentTab = 'today';
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(`tab-${tab}`).classList.add('active');
+  document.getElementById(`nav-${tab}`).classList.add('active');
+  document.getElementById('mainContent').scrollTop = 0;
+  currentTab = tab;
+}
+
+function toggleSection(name) {
+  state.openSections[name] = !state.openSections[name];
+  saveState();
+  const body = document.getElementById(`section-body-${name}`);
+  const header = body?.previousElementSibling;
+  if (body) body.classList.toggle('hidden', !state.openSections[name]);
+  if (header) {
+    const toggle = header.querySelector('.section-toggle');
+    if (toggle) toggle.classList.toggle('open', state.openSections[name]);
+  }
+}
+
+function toggleInfoSection(id) {
+  state.openInfoSections[id] = !state.openInfoSections[id];
+  saveState();
+  const body = document.getElementById(`info-body-${id}`);
+  if (body) body.classList.toggle('hidden', !state.openInfoSections[id]);
+}
+
+function logWeight() {
+  const val = parseFloat(document.getElementById('weightInput')?.value);
+  if (!val || val < 30 || val > 200) { showToast('Please enter a valid weight'); return; }
+  const t = today();
+  state.weights = state.weights.filter(w => w.date !== t);
+  state.weights.push({ date: t, kg: val });
+  state.weights.sort((a,b) => a.date.localeCompare(b.date));
+  saveState();
+  renderProgress();
+  showToast(`✓ ${val} kg logged!`);
+}
+
+function dismissInstallHint() {
+  state.installHintDismissed = true;
+  saveState();
+  render();
+}
+
+function requestNotifications() {
+  if (!('Notification' in window)) {
+    showToast('Notifications not supported in this browser');
+    return;
+  }
+  Notification.requestPermission().then(perm => {
+    if (perm === 'granted') {
+      state.notifEnabled = true;
+      saveState();
+      showToast('🔔 Reminders enabled!');
+      scheduleReminders();
+    } else {
+      showToast('Please allow notifications in browser settings');
+    }
+  });
+}
+
+function scheduleReminders() {
+  const reminders = [
+    { hour: 7, min: 0, msg: '💧 Time to drink your water & psyllium husk!', title: 'Morning Routine' },
+    { hour: 7, min: 10, msg: '🍌 Pre-workout: banana + coffee time!', title: 'Pre-Workout' },
+    { hour: 9, min: 0, msg: '🥣 Post-workout: eat your oats now! + 💊 Creatine', title: 'Breakfast Time' },
+    { hour: 13, min: 0, msg: '🥗 Lunch time! Solid meal preferred over smoothie.', title: 'Lunch Reminder' },
+    { hour: 15, min: 30, msg: '🍓 Optional snack: Greek yogurt or rice cakes', title: 'Snack Check-in' },
+    { hour: 19, min: 0, msg: '🍽️ Dinner time! 180–200g protein + 250–300g veg', title: 'Dinner Time' },
+    { hour: 21, min: 0, msg: '🥛 Casein protein before bed + 🌙 Magnesium!', title: 'Bedtime Routine' },
+  ];
+
+  const now = new Date();
+  reminders.forEach(r => {
+    const target = new Date();
+    target.setHours(r.hour, r.min, 0, 0);
+    if (target > now) {
+      const delay = target - now;
+      setTimeout(() => {
+        if (Notification.permission === 'granted') {
+          new Notification(r.title, { body: r.msg, icon: '💚' });
+        }
+      }, delay);
+    }
+  });
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// ===== CHECK REMINDER ON INTERVAL =====
+function setupReminderInterval() {
+  setInterval(() => {
+    if (state.notifEnabled && Notification.permission === 'granted') {
+      scheduleReminders();
+    }
+    // Re-render header date at midnight
+    const now = new Date();
+    if (now.getHours() === 0 && now.getMinutes() === 0) {
+      render();
+    }
+  }, 60000); // Check every minute
+}
+
+// ===== INIT =====
+loadState();
+render();
+setupReminderInterval();
+</script>
+
+
+</body></html>
